@@ -35,33 +35,39 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        // create scalable root component
         ScalableContentPane canvas = new ScalableContentPane();
+        
+        // define background style
         canvas.setStyle("-fx-background-color: linear-gradient(to bottom, rgb(10,32,60), rgb(42,52,120));");
 
+        // create a new flow object
         VFlow flow = FlowFactory.newFlow();
 
-        flow.getModel().setVisible(true);
+        // make it visible
+        flow.setVisible(true);
 
+        // add two nodes to the flow
         VNode n1 = flow.newNode();
-        VFlow n2 = flow.newSubFlow();
+        VNode n2 = flow.newNode();
 
+        // specify input & output capabilities...
+        
+        // ... for node 1
         n1.setInput(true, "data");
         n1.setOutput(true, "data");
+        
+        // ... for node 2
         n2.setInput(true, "data");
         n2.setOutput(true, "data");
 
-        flow.connect(n1, n2, "data");
+        // create skin factory for flow visualization
+        FXSkinFactory fXSkinFactory = new FXSkinFactory(canvas.getContentPane());
+        
+        // generate the ui for the flow
+        flow.setSkinFactory(fXSkinFactory);
 
-        VNode sn1 = n2.newNode();
-        VNode sn2 = n2.newNode();
-
-        sn1.setInput(true, "data");
-        sn1.setOutput(true, "data");
-        sn2.setInput(true, "data");
-        sn2.setOutput(true, "data");
-
-        flow.setSkinFactory(new FXSkinFactory(canvas.getContentPane()));
-
+        // the usual application setup
         Scene scene = new Scene(canvas, 800, 800);
         primaryStage.setTitle("VWorkflows Tutorial 01");
         primaryStage.setScene(scene);
