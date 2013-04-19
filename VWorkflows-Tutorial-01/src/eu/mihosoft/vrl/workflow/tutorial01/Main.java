@@ -35,7 +35,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // create scalable root component
+        // create scalable root pane
         ScalableContentPane canvas = new ScalableContentPane();
         
         // define background style
