@@ -11,12 +11,24 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.5'
 }
 
-int JDK = 7;
+String javaVersion = System.getProperty("java.version")
+
+int jdk = 7;
+
+if (javaVersion.startsWith("1.7")) {
+    jdk=7;
+} else if (javaVersion.startsWith("1.8")) {
+    jdk=8;
+} else {
+    System.err.println("Unsupported JDK: " + javaVersion);
+}
+    
+println(">> using jdk " + javaVersion)
 
 dependencies {
     compile "com.thoughtworks.xstream:xstream:1.4.4"
-    compile fileTree (dir: './lib/jfxtras/jdk'+JDK, includes: ['*.jar'])
-    compile fileTree (dir: './lib/vworkflows/jdk'+JDK, includes: ['*.jar'])
+    compile fileTree (dir: './lib/jfxtras/jdk'+jdk, includes: ['*.jar'])
+    compile fileTree (dir: './lib/vworkflows/jdk'+jdk, includes: ['*.jar'])
 }
 
 sourceSets {
