@@ -54,18 +54,18 @@ public class Main extends Application {
         // specify input & output capabilities...
         
         // ... for node 1
-        n1.setInput(true, "data");
-        n1.setOutput(true, "data");
+        n1.addInput("data");
+        n1.addOutput("data");
         
         // ... for node 2
-        n2.setInput(true, "data");
-        n2.setOutput(true, "data");
+        n2.addInput("data");
+        n2.addOutput("data");
 
         // create skin factory for flow visualization
         FXSkinFactory fXSkinFactory = new FXSkinFactory(canvas.getContentPane());
         
         // generate the ui for the flow
-        flow.setSkinFactory(fXSkinFactory);
+        flow.setSkinFactories(fXSkinFactory);
 
         // the usual application setup
         Scene scene = new Scene(canvas, 800, 800);
